@@ -1,0 +1,54 @@
+# ./install
+# !/bin/sh
+
+echo "##### Start setup ######"
+
+set -e
+
+if ["$(dscl . -read ~/ UserShell)" = "UserShell: /bin/bash"]; then
+  chsh -s /bin/zsh
+  chmod -R 755 /usr/local/share/zsh
+  chown -R root:staff zsh
+fi
+
+echo "##### Install Homebrew ######"
+
+if [ ! -f /usr/local/bin/brew ]; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+fi
+
+CLONE_PATH=/miyamotoatsushi
+if [ ! -d "$CLONE_PATH" ]; then
+  mkdir -p "$CLONE_PATH"
+fi
+
+if [ ! -d "$CLONE_PATH"/dotfiles ]; then
+  cd "$CLONE_PATH"
+  git clone git@github.com:atsushii/dotfiles.git
+if
+
+if [ ! -d "$CLONE_PATH"/dotfiles ]; then
+  cd "$CLONE_PATH"
+  git clone git@github.com:atsushii/dotfiles.git
+if
+
+echo "##### Install prezto ######"
+
+git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+setopt EXTENDED_GLOB
+for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+done
+
+ln -sf ~/dotfiles/.zpreztorc ~/.zpreztorc
+
+ln -sv ~/dotfiles/.zshrc ~/
+
+echo "##### Install .zshrc ######"
+
+brew bundle -v --file "$CLONE_PATH/dotfiles/Brewfile"
+
+chsh -s /bin/zsh
+
+source ~/dotfiles/terminal/.zshrc
+source ~/dotfiles/terminal/.zpreztorc

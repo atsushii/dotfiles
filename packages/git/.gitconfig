@@ -1,0 +1,45 @@
+[user]
+	name       = atsushii
+	email      = atsushimiyamoto07@gmail.com
+[alias]
+	s   = status
+	d   = diff
+	a   = add
+	aa  = add -A
+	b   = branch
+	co  = checkout
+	cob = checkout -b
+	c   = commit
+	cm  = commit -m
+	pso = push origin
+	pl  = pull
+	plo = pull origin
+	f   = fetch
+	fup = fetch upstream
+  m = merge
+  logn = log --name-status --oneline
+  
+[core]
+	excludesfile = ~/.gitignore
+	editor = nvim
+[init]
+	defaultBranch = main
+[commit]
+	gpgsign = true
+[pull]
+	rebase = false
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+[delta]
+    line-numbers = true
+    side-by-side = true
+[interactive]
+    diffFilter = delta --color-only
