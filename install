@@ -5,13 +5,23 @@ echo "##### Start setup ######"
 
 set -e
 
+log() {
+  message=$1
+  echo 💣 "$message"
+}
+
+is_dir() {
+  path="$1"
+  [ -f "$path"]
+}
+
 if ["$(dscl . -read ~/ UserShell)" = "UserShell: /bin/bash"]; then
   chsh -s /bin/zsh
   chmod -R 755 /usr/local/share/zsh
   chown -R root:staff zsh
 fi
 
-echo "##### Install Homebrew ######"
+log "Install: Homebrew"
 
 if [ ! -f /usr/local/bin/brew ]; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
@@ -32,7 +42,7 @@ if [ ! -d "$CLONE_PATH"/dotfiles ]; then
   git clone git@github.com:atsushii/dotfiles.git
 if
 
-echo "##### Install prezto ######"
+log "Install: prezto"
 
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 setopt EXTENDED_GLOB
@@ -41,12 +51,36 @@ for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
 done
 
 ln -sf ~/dotfiles/.zpreztorc ~/.zpreztorc
-
 ln -sv ~/dotfiles/.zshrc ~/
-
-echo "##### Install .zshrc ######"
-
 brew bundle -v --file "$CLONE_PATH/dotfiles/Brewfile"
+
+### asdf install script
+for plugin in $(awk '{print $1}' ~/.tool-versions); do
+  if ! is_dir ~/.asdf/plugins/"$plugin"; then
+    asdf plugin add "$plugin"
+  fi
+done
+
+if_runtime_versions_changed() {
+  plugin="$1"
+  specified=$(grep "$plugin" ~/.tool-versions | awk '{$1=""; print $0}')
+
+  installed=$(asdf list "$plugin" 2>&1)
+
+  is_changed=
+  for version in $specified; do
+    match=$(echo "$installed" | grep "$version")
+    [ -z "$match" ] && is_changed=1
+
+    [ "$is_changed" ]
+}
+
+for plugin in $(asdf plugin list); do
+  if is_runtime_versions_changed "$plugin"; then
+    log "Install runtime: $plugin"
+    asdf ins†all "$plugin"
+  fi
+done
 
 chsh -s /bin/zsh
 
