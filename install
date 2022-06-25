@@ -12,14 +12,17 @@ log() {
 
 is_dir() {
   path="$1"
-  [ -f "$path"]
+  [ -d "$path" ]
 }
 
-if ["$(dscl . -read ~/ UserShell)" = "UserShell: /bin/bash"]; then
-  chsh -s /bin/zsh
-  chmod -R 755 /usr/local/share/zsh
-  chown -R root:staff zsh
-fi
+# if ["$(dscl . -read ~/ UserShell)" = "UserShell: /bin/bash"]; then
+#   chsh -s /bin/zsh
+#   chmod -R 755 /usr/local/share/zsh
+#   chown -R root:staff zsh
+# fi
+
+# chsh -s /usr/local/share/zsh
+# chmod -R 755 /usr/local/share/zsh
 
 log "Install: Homebrew"
 
@@ -27,32 +30,22 @@ if [ ! -f /usr/local/bin/brew ]; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
-CLONE_PATH=/miyamotoatsushi
-if [ ! -d "$CLONE_PATH" ]; then
-  mkdir -p "$CLONE_PATH"
+# if [ ! -d ~/dotfiles ]; then
+#   cd ~
+#   git clone git@github.com:atsushii/dotfiles.git
+# fi
+
+# brew bundle -v --file=~/dotfiles/Brewfile
+
+log "Dona: Install pkg"
+
+if [ ! -d ~/.config ]; then
+  mkdir ~/.config
 fi
 
-if [ ! -d "$CLONE_PATH"/dotfiles ]; then
-  cd "$CLONE_PATH"
-  git clone git@github.com:atsushii/dotfiles.git
-if
+stow -v -d ~/dotfiles/packages -t $HOME zsh starship asdf git
 
-if [ ! -d "$CLONE_PATH"/dotfiles ]; then
-  cd "$CLONE_PATH"
-  git clone git@github.com:atsushii/dotfiles.git
-if
-
-log "Install: prezto"
-
-git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-setopt EXTENDED_GLOB
-for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-done
-
-ln -sf ~/dotfiles/.zpreztorc ~/.zpreztorc
-ln -sv ~/dotfiles/.zshrc ~/
-brew bundle -v --file "$CLONE_PATH/dotfiles/Brewfile"
+log "Install: Runtime" 
 
 ### asdf install script
 for plugin in $(awk '{print $1}' ~/.tool-versions); do
@@ -61,16 +54,17 @@ for plugin in $(awk '{print $1}' ~/.tool-versions); do
   fi
 done
 
-if_runtime_versions_changed() {
+is_runtime_versions_changed() {
   plugin="$1"
   specified=$(grep "$plugin" ~/.tool-versions | awk '{$1=""; print $0}')
-
+  log $specified
   installed=$(asdf list "$plugin" 2>&1)
 
   is_changed=
   for version in $specified; do
     match=$(echo "$installed" | grep "$version")
     [ -z "$match" ] && is_changed=1
+  done
 
     [ "$is_changed" ]
 }
@@ -78,11 +72,6 @@ if_runtime_versions_changed() {
 for plugin in $(asdf plugin list); do
   if is_runtime_versions_changed "$plugin"; then
     log "Install runtime: $plugin"
-    asdf ins†all "$plugin"
+    asdf install "$plugin"
   fi
 done
-
-chsh -s /bin/zsh
-
-source ~/dotfiles/terminal/.zshrc
-source ~/dotfiles/terminal/.zpreztorc

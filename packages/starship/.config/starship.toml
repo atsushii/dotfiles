@@ -1,0 +1,8 @@
+add_newline = true
+
+[character]
+success_symbol = "🦄"
+
+[directory]
+truncation_length = 100
+truncate_to_repo = false
