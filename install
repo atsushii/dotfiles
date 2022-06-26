@@ -15,6 +15,11 @@ is_dir() {
   [ -d "$path" ]
 }
 
+is_file() {
+    path="$1"
+    [ -f "$path" ]
+}
+
 # if ["$(dscl . -read ~/ UserShell)" = "UserShell: /bin/bash"]; then
 #   chsh -s /bin/zsh
 #   chmod -R 755 /usr/local/share/zsh
@@ -43,7 +48,7 @@ if [ ! -d ~/.config ]; then
   mkdir ~/.config
 fi
 
-stow -v -d ~/dotfiles/packages -t $HOME zsh starship asdf git
+stow -v -d ~/dotfiles/packages -t $HOME zsh starship asdf git keybindings wm
 
 log "Install: Runtime" 
 
@@ -75,3 +80,18 @@ for plugin in $(asdf plugin list); do
     asdf install "$plugin"
   fi
 done
+
+
+#################
+### limelight ###
+#################
+
+limelight_path=/usr/local/bin/limelight
+if ! is_file "$limelight_path"; then
+  git clone https://github.com/koekeishiya/limelight
+  cd limelight
+  make
+  mv ./bin/limelight /usr/local/bin/limelight
+  cd ../
+  rm -rf limelight
+fi

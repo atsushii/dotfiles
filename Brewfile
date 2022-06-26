@@ -1,8 +1,10 @@
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
+tap "github/gh"
+tap "koekeishiya/formulae"
+
 cask_args appdir: "/Applications"
 
-brew "jq"
 brew "curl"
 
 brew "asdf"
@@ -13,9 +15,12 @@ brew "gawk"
 brew "zsh"
 brew "docker"
 brew "stow"
-brew "starship"
 brew "nvim"
 
+brew "starship"
+brew "jq"
+brew "yabai"
+brew "skhd"
 brew "hackgen-nerd-fonts"
 brew "font-hack-nerd-font"
 brew "zsh-autosuggestions"
