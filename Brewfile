@@ -1,4 +1,5 @@
 tap "homebrew/cask"
+tap "homebrew/cask-fonts"
 cask_args appdir: "/Applications"
 
 brew "jq"
@@ -15,6 +16,10 @@ brew "stow"
 brew "starship"
 brew "nvim"
 
+brew "hackgen-nerd-fonts"
+brew "font-hack-nerd-font"
+brew "zsh-autosuggestions"
+
 cask "docker"
 cask "slack"
 cask "visual-studio-code"
@@ -23,3 +28,4 @@ cask "figma"
 cask "google-chrome"
 cask "notion"
 cask "1password"
+cask "iterm2"

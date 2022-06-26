@@ -11,3 +11,5 @@ alias k="kubectl"
 alias d="docker"
 
 . /usr/local/opt/asdf/libexec/asdf.sh
+
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
