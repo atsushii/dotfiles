@@ -10,19 +10,19 @@ truncate_to_repo = true
 truncation_symbol = ".../"
 
 [docker_context]
-symbol = "🐳 "
+symbol = " "
 
 [git_branch]
-symbol = "🌱 "
+symbol = " "
 truncation_length = 100
 truncation_symbol = ""
 
 [git_commit]
 commit_hash_length = 4
-tag_symbol = " 🏷 "
+tag_symbol = "🏷 "
 
 [golang]
-format = "via [🏎💨 $version](bold cyan) "
+format = "via [ﳑ $version](bold cyan) "
 
 [terraform]
 format = "[🏎💨 $version$workspace]($style) "

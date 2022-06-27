@@ -40,7 +40,7 @@ fi
 #   git clone git@github.com:atsushii/dotfiles.git
 # fi
 
-# brew bundle -v --file=~/dotfiles/Brewfile
+brew bundle -v --file=~/dotfiles/Brewfile
 
 log "Dona: Install pkg"
 
