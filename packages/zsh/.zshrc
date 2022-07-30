@@ -6,10 +6,11 @@ eval "$(starship init zsh)"
 alias code="open -a 'Visual Studio Code'"
 alias ll="ls -l"
 alias g="git"
-alias terraform="tf"
+alias tf="terraform"
 alias k="kubectl"
 alias d="docker"
 
 . /usr/local/opt/asdf/libexec/asdf.sh
 
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

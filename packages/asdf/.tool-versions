@@ -5,4 +5,4 @@ yarn 1.22.10
 awscli 2.2.31
 direnv 2.30.3
 kubectl 1.23.3
-telepresence 2.0.0
+telepresence 2.6.0
