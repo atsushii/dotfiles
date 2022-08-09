@@ -2,7 +2,6 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "github/gh"
 tap "koekeishiya/formulae"
-
 cask_args appdir: "/Applications"
 
 brew "curl"
@@ -36,3 +35,4 @@ cask "google-chrome"
 cask "notion"
 cask "1password"
 cask "iterm2"
+cask "sequel-ace"
