@@ -16,6 +16,8 @@ brew "docker"
 brew "stow"
 brew "nvim"
 
+brew "k9s"
+
 brew "starship"
 brew "jq"
 brew "yabai"
