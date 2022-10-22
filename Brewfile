@@ -19,6 +19,7 @@ brew "exa"
 brew "bat"
 brew "fd"
 brew "fzf"
+brew "tig"
 
 brew "k9s"
 
