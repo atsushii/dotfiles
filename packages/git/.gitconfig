@@ -43,3 +43,5 @@
     side-by-side = true
 [interactive]
     diffFilter = delta --color-only
+[credential]
+	helper = store

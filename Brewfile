@@ -15,6 +15,10 @@ brew "zsh"
 brew "docker"
 brew "stow"
 brew "nvim"
+brew "exa"
+brew "bat"
+brew "fd"
+brew "fzf"
 
 brew "k9s"
 
