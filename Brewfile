@@ -20,6 +20,7 @@ brew "bat"
 brew "fd"
 brew "fzf"
 brew "tig"
+brew "fig"
 
 brew "k9s"
 
