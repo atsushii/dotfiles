@@ -1,8 +1,11 @@
 nodejs 18.9.0
-golang 1.18.2
+golang 1.19.2
 python 3.9.0
 yarn 1.22.10
 awscli 2.7.35
 direnv 2.30.3
 kubectl 1.23.3
 telepresence 2.6.0
+mage 1.14.0
+ecspresso 2.0.0
+terraform 1.1.7
