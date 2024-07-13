@@ -22,6 +22,8 @@ brew "fzf"
 brew "tig"
 brew "fig"
 
+brew "pipx"
+
 brew "k9s"
 
 brew "starship"

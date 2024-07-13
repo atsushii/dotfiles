@@ -1,6 +1,7 @@
 [user]
 	name       = atsushii
 	email      = atsushimiyamoto07@gmail.com
+	signingkey = 03CFC82407194EB8
 [alias]
 	s   = status
 	d   = diff
@@ -18,6 +19,7 @@
 	fup = fetch upstream
   m = merge
   logn = log --name-status --oneline
+	dmb = "!f () { git checkout $1; git branch --merged|egrep -v '\\*|develop|main'|xargs git branch -d; };f"
   
 [core]
 	excludesfile = ~/.gitignore
@@ -25,7 +27,7 @@
 [init]
 	defaultBranch = main
 [commit]
-	gpgsign = false
+	gpgsign = true
 [pull]
 	rebase = false
 [filter "lfs"]

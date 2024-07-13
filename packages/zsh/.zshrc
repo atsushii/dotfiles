@@ -60,3 +60,18 @@ export PATH="/usr/local/bin/git:$PATH"
 
 # Fig post block. Keep at the bottom of this file.
 [[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && builtin source "$HOME/.fig/shell/zshrc.post.zsh"
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/miyamotoatsushi/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/miyamotoatsushi/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/miyamotoatsushi/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/miyamotoatsushi/google-cloud-sdk/completion.zsh.inc'; fi
+
+# bun completions
+[ -s "/Users/miyamotoatsushi/.bun/_bun" ] && source "/Users/miyamotoatsushi/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
