@@ -46,3 +46,4 @@ cask "notion"
 cask "1password"
 cask "iterm2"
 cask "sequel-ace"
+cask "zed"　
