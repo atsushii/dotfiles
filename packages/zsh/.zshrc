@@ -75,3 +75,6 @@ if [ -f '/Users/miyamotoatsushi/google-cloud-sdk/completion.zsh.inc' ]; then . '
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# 署名
+export GPG_TTY=$TTY
